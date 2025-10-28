@@ -1,3 +1,6 @@
+# Classe que representa o restaurante
+# Gerencia cozinheiros, filas de pedidos e estatísticas de atendimento
+# Também controla limites de fila e pedidos prioritários
 from cozinha.cozinheiro import Cozinheiro
 from cozinha.pedidos.pedido import Pedido
 from cozinha.pedidos.pedido_normal import PedidoNormal
@@ -31,11 +34,11 @@ class Restaurante:
         if self.pode_receber_pedido():
             fila.enqueue(pedido)
         else:
-            if pedido.__tipo_pedido == Pedido.TIPO_PRIORITARIO:
+            if pedido.tipo() == Pedido.TIPO_PRIORITARIO:
                 self.contador_pedidos_rejeitados_prioritarios += 1
             else:
                 self.contador_pedidos_rejeitados_normais += 1
-                self.contador_pedidos_rejeitados += 1
+            self.contador_pedidos_rejeitados += 1
 
     def novo_pedido(self, pedido: Pedido) -> None:
         if isinstance(pedido, PedidoNormal):
@@ -57,12 +60,13 @@ class Restaurante:
                     cozinheiro.define_pedido_atual(self.fila_pedidos_normais.dequeue())
             else:
                 pedido_concluido = cozinheiro.trabalha()
-                if pedido_concluido:
+                if pedido_concluido:  
                     self.contador_pedidos_concluidos += 1
                     if pedido_concluido.eh_prioritario():
                         self.contador_pedidos_concluidos_prioritarios += 1
-                else:
-                    self.contador_pedidos_concluidos_normais += 1
+                    else:
+                        self.contador_pedidos_concluidos_normais += 1
+
 
     def pode_iniciar_prioritario(self) -> bool:
         return (
