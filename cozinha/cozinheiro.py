@@ -1,3 +1,6 @@
+# Classe que representa um cozinheiro no restaurante
+# Cada cozinheiro pode atender um pedido por vez e mantém estatísticas de atendimento
+# Também rastreia o tempo ocioso e o número de pedidos atendidos
 from cozinha.pedidos.pedido import Pedido
 
 
@@ -33,10 +36,10 @@ class Cozinheiro:
             return pedido_concluido
         return None
 
-    def get_pedidos_atendidos(self) -> int:
+    def pedidos_concluidos(self) -> int:
         return self.__pedidos_atendidos
 
-    def get_tempo_ocioso(self) -> int:
+    def tempo_livre(self) -> int:
         return self.__tempo_ocioso
 
     def __str__(self) -> str:
