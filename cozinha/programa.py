@@ -1,3 +1,6 @@
+# Programa principal que gerencia o fluxo do restaurante
+# Inclui a classe de estatísticas e a tabela de estatísticas
+# Importa utilitários para limpar a tela
 from cozinha.estatistica.estatistica import Estatistica
 from cozinha.estatistica.tabelaestatistica import Tabela
 from cozinha.pedidos.pedido_normal import PedidoNormal
@@ -40,6 +43,9 @@ class Programa:
                 restaurante.novo_pedido(PedidoPrioritario(duracao))
             elif comando == self.CMD_TABELA: 
                 tabela.mostrar_tabela()
+                continue
+            elif comando == self.CMD_SAIR:
+                print('Encerrando o programa...')
                 break
 
     def obter_int_value(self, msg: str) -> int:
