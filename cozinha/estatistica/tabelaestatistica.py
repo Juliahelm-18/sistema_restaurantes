@@ -1,3 +1,4 @@
+# Classe para exibir a tabela de estatísticas do restaurante
 from cozinha.estatistica.estatistica import Estatistica
 
 class Tabela:
@@ -7,31 +8,39 @@ class Tabela:
 
     def mostrar_tabela(self):
         print("\n=== Estatísticas Finais ===\n")
+        print("\t\t\tTOTAL\tNORMAL\tPRIORITÁRIO")
+        # Utilizei \t para alinhar as colunas da tabela
 
-        print(f"{'':<20} {'TOTAL':<10} {'NORMAL':<10} {'PRIORITÁRIO':<10}")
-        
-        total_recebidos = self.estatistica.total_pedidos()
-        normais_recebidos = self.estatistica.total_pedidos_recebidos_normais()
-        prioritarios_recebidos = self.estatistica.total_pedidos_recebidos_prioritarios()
-        print(f"{'Pedidos recebidos':<20} {total_recebidos:<10} {normais_recebidos:<10} {prioritarios_recebidos:<10}")
+        print("Pedidos recebidos\t", self.estatistica.total_pedidos(),
+        "\t", self.estatistica.total_pedidos_recebidos_normais(),
+        "\t", self.estatistica.total_pedidos_recebidos_prioritarios())
 
-        total_rejeitados = self.estatistica.total_rejeitados()
-        normais_rejeitados = self.estatistica.total_rejeitados_normais()
-        prioritarios_rejeitados = self.estatistica.total_rejeitados_prioritarios()
-        print(f"{'Pedidos rejeitados':<20} {total_rejeitados:<10} {normais_rejeitados:<10} {prioritarios_rejeitados:<10}")
+        print("Pedidos rejeitados\t", self.estatistica.total_rejeitados(),
+        "\t", self.estatistica.total_rejeitados_normais(),
+        "\t", self.estatistica.total_rejeitados_prioritarios())
 
-        total_concluidos = self.estatistica.total_concluidos()
-        normais_concluidos = self.estatistica.total_concluidos_normais()
-        prioritarios_concluidos = self.estatistica.total_concluidos_prioritarios()
-        print(f"{'Pedidos concluídos':<20} {total_concluidos:<10} {normais_concluidos:<10} {prioritarios_concluidos:<10}")
+        print("Pedidos concluídos\t", self.estatistica.total_concluidos(),
+        "\t", self.estatistica.total_concluidos_normais(),
+        "\t", self.estatistica.total_concluidos_prioritarios())
 
         print("\n--- Cozinheiros ---")
-        print(f"{'Cozinheiro':<12} {'Tempo total ocioso':<20} {'Pedidos concluídos':<20}")
+        print("Cozinheiro\tTempo ocioso\tPedidos concluídos")
 
-        pedidos = self.estatistica.pedidos_atendidos_por_cozinheiro()
-        ociosidade = self.estatistica.tempo_ocioso_por_cozinheiro()
-
-        for i in range(len(pedidos)):
-            print(f"{i+1:<12} {ociosidade[i]:<20} {pedidos[i]:<20}")
+        # Percorre cada cozinheiro mostrando seu tempo ocioso e pedidos concluídos
+        # enumerate gera o índice do cozinheiro (0,1,2...) para mostrar na tabela
+        # zip combina duas listas: tempos de ociosidade e pedidos atendidos
+        for i, (ociosidade, pedidos) in enumerate(zip(
+        self.estatistica.tempo_ocioso_por_cozinheiro(),
+        self.estatistica.pedidos_atendidos_por_cozinheiro()
+        )):
+            print(f"{i+1}\t\t{ociosidade}\t\t{pedidos}") 
+            # Utilizei i+1 para que a contagem comece em 1 e não em 0
 
         print("\nCozinheiro que mais atendeu pedidos:", self.estatistica.cozinheiro_que_mais_atendeu())
+
+        while True:
+            comando = input("\nDigite (V) para voltar ao menu: ").strip().upper()
+            if comando == 'V':
+                break
+            print("Comando inválido.")
+        # Fiz um loop para que o usuário possa ver a tabela antes de voltar ao menu
