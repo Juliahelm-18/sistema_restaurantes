@@ -35,7 +35,10 @@ O projeto inclui testes automatizados para verificar se os pedidos, cozinheiros 
 
 ## Como executar os testes
 - Abra o terminal na pasta do projeto
-- Execute o comando: python -m unittest discover -s tests -p "*.py"
+- Execute o comando:
+```bash
+   python -m unittest discover -s tests -p "*.py"
+```
 
 ## Interpretando resultados
 - . : teste passou com sucesso
