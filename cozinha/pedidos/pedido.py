@@ -1,3 +1,6 @@
+# Classe que representa um pedido no restaurante
+# Cada pedido tem uma duração e um tipo (normal ou prioritário)
+# Também mantém contadores estáticos para o total de pedidos criados
 class Pedido:
     TIPO_NORMAL = "N"
     TIPO_PRIORITARIO = "P"
@@ -21,6 +24,9 @@ class Pedido:
 
     def duracao(self) -> int:
         return self.__duracao_pedido
+
+    def tipo(self) -> str: 
+        return self.__tipo_pedido
 
     def eh_prioritario(self) -> bool:
         return self.__tipo_pedido == Pedido.TIPO_PRIORITARIO
