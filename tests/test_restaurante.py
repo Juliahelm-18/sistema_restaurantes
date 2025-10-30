@@ -4,6 +4,8 @@ from cozinha.pedidos.pedido_normal import PedidoNormal
 from cozinha.pedidos.pedido_prioritario import PedidoPrioritario
 
 class TestRestaurante(unittest.TestCase):
+    """Testa o funcionamento básico do restaurante: recebimento, rejeição e execução de pedidos."""
+
     def setUp(self):
         self.restaurante = Restaurante(qtd_cozinheiros=2, limite_fila_pedidos=3)
 
@@ -28,7 +30,6 @@ class TestRestaurante(unittest.TestCase):
         self.restaurante.novo_pedido(pedido1)
         self.restaurante.novo_pedido(pedido2)
         self.restaurante.executa_pedidos()
-        # Deve ter atribuído o prioritário a algum cozinheiro
         self.assertTrue(any(c.eh_pedido_prioritario() for c in self.restaurante.cozinheiros))
 
 if __name__ == '__main__':
