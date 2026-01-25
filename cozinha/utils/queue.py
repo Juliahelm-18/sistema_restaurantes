@@ -53,10 +53,3 @@ class Queue:
     def queue_length(self) -> int:
         return self.length
 
-    # def queue_length(self):
-    #     contador = 0
-    #     current = self.head
-    #     while current:
-    #         contador += 1
-    #         current = current.next
-    #     return contador
